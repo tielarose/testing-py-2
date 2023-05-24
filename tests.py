@@ -16,9 +16,9 @@ class PartyTests(unittest.TestCase):
         self.assertIn(b"board games, rainbows, and ice cream sundaes", result.data)
 
     def test_no_rsvp_yet(self):
-        # FIXME: Add a test to show we see the RSVP form, but NOT the
-        # party details
-        print("FIXME")
+        result = self.client.get("/")
+        self.assertIn(b"Oooh! I want to come!", result.data)
+        self.assertNotIn(b"123 Magic Unicorn Way", result.data)
 
     def test_rsvp(self):
         result = self.client.post("/rsvp",
